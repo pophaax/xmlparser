@@ -1,13 +1,12 @@
 #include <iostream>
 #include "../pugi/pugixml.hpp"
 
-class Parser {
+class Parse {
 
 public:
 
   /* Parse waypoint information */
   static void waypoint(const char* filename) {
-    pugi::xml_document doc;
     doc.load_file(filename);
     pugi::xml_node route = doc.child("route");
     for (pugi::xml_node wp = route.first_child(); wp; wp = wp.next_sibling()) {
@@ -42,7 +41,7 @@ public:
 };
 
 int main(void) {
-  Parser::wind("xml/wind.xml");
-  Parser::waypoint("xml/waypoint.xml");
-  Parser::config("xml/config.xml");
+  Parse::wind("xml/wind.xml");
+  Parse::waypoint("xml/waypoint.xml");
+  Parse::config("xml/config.xml");
 }
