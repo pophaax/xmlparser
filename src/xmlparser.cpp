@@ -7,6 +7,7 @@ public:
 
   /* Parse waypoint information */
   static void waypoint(const char* filename) {
+    pugi::xml_document doc;
     doc.load_file(filename);
     pugi::xml_node route = doc.child("route");
     for (pugi::xml_node wp = route.first_child(); wp; wp = wp.next_sibling()) {
