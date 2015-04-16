@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstring>
 #include <sstream>
 #include "../pugi/pugixml.hpp"
 
@@ -7,15 +8,15 @@ class XML_log {
 public:
 
   static void log_to_file(std::string timestamp,
-                          float windsensor_dir_deg,
-                          float windsensor_speed_ms,
-                          float compass_heading_deg,
-                          float compass_pitch_deg,
-                          float compass_roll_deg,
-                          float gps_pos_arg1,
-                          float gps_pos_arg2,
-                          float gps_cog_deg,
-                          float gps_sog_ms,
+                          double windsensor_dir_deg,
+                          double windsensor_speed_ms,
+                          double compass_heading_deg,
+                          double compass_pitch_deg,
+                          double compass_roll_deg,
+                          double gps_pos_arg1,
+                          double gps_pos_arg2,
+                          double gps_cog_deg,
+                          double gps_sog_ms,
                           int rudder_position,
                           int sail_position) {
 
@@ -126,20 +127,45 @@ public:
     doc.save_file("log_output.xml");
   }
 
+  static void parse_output_file(const char* filename) {
+    pugi::xml_document doc;
+    doc.load_file(filename);
+    
+
+    std::cout << "Parsing file: " << filename << std::endl;
+
+    pugi::xml_node ship = doc.child("message");
+    for (pugi::xml_node child = ship.first_child(); child; child = child.next_sibling()) {
+      for (pugi::xml_node node = child.first_child(); node; node = node.next_sibling()) {
+        std::cout << node.name() << "=" << node.child_value() << std::endl;
+        
+        /* Only 3rd level */
+        if(std::strcmp(node.name(), "gml:Point") == 0) {
+          std::cout << "************In gml:point***********" << std::endl;
+          pugi::xml_node node_child = node.first_child();
+          std::cout << node_child.name() << "=" << node_child.child_value() << std::endl;
+        }
+      }
+    }
+  }
 };
+
 
 int main() {
   XML_log::log_to_file("2015-04-10T10:53:15.1234Z", //Timestamp
-                        (float)270.2, //winddir degrees
-                        (float)4.3, //windspeed ms
-                        (float)11.3, //Heading deg
-                        (float)3.2, //Pitch deg
-                        (float)5.3, //Roll deg
-                        (float)49.40, // gml:pos arg1
-                        (float)-123.26, // gml:pos arg2
-                        (float)15.4, // cog_deg
-                        (float)2.0, //sog_ms
-                        (int)5341,//Rudderpos
-                        (int)3256 //Sailpos
-                        );
+                      (double)270.2, //winddir degrees
+                      (double)4.3, //windspeed ms
+                      (double)11.3, //Heading deg
+                      (double)3.2, //Pitch deg
+                      (double)5.3, //Roll deg
+                      (double)49.40, // gml:pos arg1
+                      (double)-123.26, // gml:pos arg2
+                      (double)15.4, // cog_deg
+                      (double)2.0, //sog_ms
+                      (int)5341,//Rudderpos
+                      (int)3256 //Sailpos
+                      );
+  
+  XML_log::parse_output_file("log_output.xml");
+
 }
