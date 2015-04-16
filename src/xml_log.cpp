@@ -139,9 +139,8 @@ public:
       for (pugi::xml_node node = child.first_child(); node; node = node.next_sibling()) {
         std::cout << node.name() << "=" << node.child_value() << std::endl;
         
-        /* Only 3rd level */
+        /* Only for tags on 4th level */
         if(std::strcmp(node.name(), "gml:Point") == 0) {
-          std::cout << "************In gml:point***********" << std::endl;
           pugi::xml_node node_child = node.first_child();
           std::cout << node_child.name() << "=" << node_child.child_value() << std::endl;
         }
