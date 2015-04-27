@@ -1,13 +1,9 @@
 #include <iostream>
 #include <cstring>
 #include <sstream>
-#include "../pugi/pugixml.hpp"
+#include "xml_log.h"
 
-class XML_log {
-
-public:
-
-  static void log_to_file(std::string timestamp,
+void XML_log::log_to_file(std::string timestamp,
                           double windsensor_dir_deg,
                           double windsensor_speed_ms,
                           double compass_heading_deg,
@@ -127,7 +123,7 @@ public:
     doc.save_file("log_output.xml");
   }
 
-  static void parse_output_file(const char* filename) {
+void XML_log::parse_output_file(const char* filename) {
     pugi::xml_document doc;
     doc.load_file(filename);
     
@@ -147,11 +143,13 @@ public:
       }
     }
   }
-};
 
 
 int main() {
-  XML_log::log_to_file("2015-04-10T10:53:15.1234Z", //Timestamp
+  XML_log xml_log;
+
+
+  xml_log.log_to_file("2015-04-10T10:53:15.1234Z", //Timestamp
                       (double)270.2, //winddir degrees
                       (double)4.3, //windspeed ms
                       (double)11.3, //Heading deg
@@ -165,6 +163,6 @@ int main() {
                       (int)3256 //Sailpos
                       );
   
-  XML_log::parse_output_file("log_output.xml");
+  xml_log.parse_output_file("log_output.xml");
 
 }
