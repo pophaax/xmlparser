@@ -6,11 +6,11 @@ EXECUTABLE_LOG = log
 FILES_LOG = src/xml_log.cpp pugi/*.cpp
 FILE_LOG = XML_log.o
 
-all: $(FILES_LOG)
+all : $(FILES_LOG)
 	 $(CC) $(CFLAGS) $(FILES_LOG) -o $(FILE_LOG)
 
-parser: $(FILES_PARSER)
+parser : $(FILES_PARSER)
 	$(CC) $(CFLAGS) $(FILES_PARSER) -o $(EXECUTABLE) 
 
-log: $(FILES_LOG)
+log : $(FILES_LOG)
 	 $(CC) $(CFLAGS) $(FILES_LOG) -o $(EXECUTABLE_LOG) 
