@@ -38,13 +38,13 @@ void XML_log::log_to_file(std::string timestamp,
     pugi::xml_node app_winddir = node_windsensor.append_child("wdi");
 
     ss.str(std::string()); //Clear stringstream
-    ss << windsensor_dir_deg;
+    ss << decimals_to_tenths(windsensor_dir_deg); 
     app_winddir.append_child(pugi::node_pcdata).set_value(ss.str().c_str());
 
     /* Tag app_winddir_deg */
     pugi::xml_node app_windspeed = node_windsensor.append_child("wsp");
     ss.str(std::string()); //Clear stringstream
-    ss << windsensor_speed_ms;
+    ss << decimals_to_tenths(windsensor_speed_ms); 
     app_windspeed.append_child(pugi::node_pcdata).set_value(ss.str().c_str());
 
     /* Tag compass */
@@ -53,19 +53,19 @@ void XML_log::log_to_file(std::string timestamp,
     /* Tag heading_deg */
     pugi::xml_node heading_deg = node_compass.append_child("hea");
     ss.str(std::string()); //Clear stringstream
-    ss << compass_heading_deg;
+    ss << decimals_to_tenths(compass_heading_deg); 
     heading_deg.append_child(pugi::node_pcdata).set_value(ss.str().c_str());
 
     /* Tag pitch_deg */
     pugi::xml_node pitch_deg = node_compass.append_child("pit");
     ss.str(std::string()); //Clear stringstream
-    ss << compass_pitch_deg;
+    ss << decimals_to_tenths(compass_pitch_deg); 
     pitch_deg.append_child(pugi::node_pcdata).set_value(ss.str().c_str());
 
     /* Tag roll_deg */
     pugi::xml_node roll_deg = node_compass.append_child("rol");
     ss.str(std::string()); //Clear stringstream
-    ss << compass_roll_deg;
+    ss << decimals_to_tenths(compass_roll_deg); 
     roll_deg.append_child(pugi::node_pcdata).set_value(ss.str().c_str());
 
     /* Tag gps */
@@ -85,13 +85,13 @@ void XML_log::log_to_file(std::string timestamp,
     /* Tag cog_deg */
     pugi::xml_node cog_deg = node_gps.append_child("cog");    
     ss.str(std::string()); //Clear stringstream
-    ss << gps_cog_deg;
+    ss << decimals_to_tenths(gps_cog_deg); 
     cog_deg.append_child(pugi::node_pcdata).set_value(ss.str().c_str());
 
     /* Tag sog_ms */
     pugi::xml_node sog_ms = node_gps.append_child("sog");
     ss.str(std::string()); //Clear stringstream
-    ss << gps_sog_ms;
+    ss << decimals_to_tenths(gps_sog_ms); 
     sog_ms.append_child(pugi::node_pcdata).set_value(ss.str().c_str());
 
     /* Tag actuator */
@@ -137,7 +137,7 @@ double XML_log::decimals_to_tenths(double variableToRoundUp){
   
   double tenths_scale = 0.1;  // Round up decimals to the nearest tenths
   double value;
-
+  
   value = (int)(variableToRoundUp / tenths_scale) * tenths_scale;
 
   return value;
