@@ -1,3 +1,6 @@
+
+#ifndef __XML_LOG_H__
+#define __XML_LOG_H__
 #include <iostream>
 #include <cstring>
 #include <sstream>
@@ -25,3 +28,5 @@ public:
   double decimals_to_tenths(double variableToRoundUp);
 
 };
+
+#endif
