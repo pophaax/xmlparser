@@ -21,4 +21,7 @@ public:
                           int sail_position);
 
   void parse_output_file(const char* filename);
+
+  double decimals_to_tenths(double variableToRoundUp);
+
 };

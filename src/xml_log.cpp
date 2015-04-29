@@ -144,9 +144,22 @@ void XML_log::parse_output_file(const char* filename) {
     }
   }
 
+double XML_log::decimals_to_tenths(double variableToRoundUp){
+  
+  double tenths_scale = 0.1;  // Round up decimals to the nearest tenths
+  double value;
+
+  value = (int)(variableToRoundUp / tenths_scale) * tenths_scale;
+
+  return value;
+}
 
 int main() {
   XML_log xml_log;
+
+  xml_log.decimals_to_tenths((double)-123.2623232332);
+  xml_log.decimals_to_tenths((double) 300.2623232332);
+  xml_log.decimals_to_tenths((double) 0.2623232332);
 
 
   xml_log.log_to_file("2015-04-10T10:53:15.1234Z", //Timestamp
