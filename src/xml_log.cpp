@@ -124,25 +124,24 @@ void XML_log::log_to_file(std::string timestamp,
   }
 
 void XML_log::parse_output_file(const char* filename) {
-    pugi::xml_document doc;
-    doc.load_file(filename);
+  pugi::xml_document doc;
+  doc.load_file(filename);
     
+  std::cout << "Parsing file: " << filename << std::endl;
 
-    std::cout << "Parsing file: " << filename << std::endl;
-
-    pugi::xml_node ship = doc.child("message");
-    for (pugi::xml_node child = ship.first_child(); child; child = child.next_sibling()) {
-      for (pugi::xml_node node = child.first_child(); node; node = node.next_sibling()) {
-        std::cout << node.name() << "=" << node.child_value() << std::endl;
+  pugi::xml_node ship = doc.child("message");
+  for (pugi::xml_node child = ship.first_child(); child; child = child.next_sibling()) {
+    for (pugi::xml_node node = child.first_child(); node; node = node.next_sibling()) {
+      std::cout << node.name() << "=" << node.child_value() << std::endl;
         
-        /* Only for tags on 4th level */
-        if(std::strcmp(node.name(), "gml:Point") == 0) {
-          pugi::xml_node node_child = node.first_child();
-          std::cout << node_child.name() << "=" << node_child.child_value() << std::endl;
-        }
+      /* Only for tags on 4th level */
+      if(std::strcmp(node.name(), "gml:Point") == 0) {
+        pugi::xml_node node_child = node.first_child();
+        std::cout << node_child.name() << "=" << node_child.child_value() << std::endl;
       }
     }
   }
+}
 
 double XML_log::decimals_to_tenths(double variableToRoundUp){
   
@@ -152,25 +151,4 @@ double XML_log::decimals_to_tenths(double variableToRoundUp){
   value = (int)(variableToRoundUp / tenths_scale) * tenths_scale;
 
   return value;
-}
-
-int main() {
-  XML_log xml_log;
-
-  xml_log.log_to_file("2015-04-10T10:53:15.1234Z", //Timestamp
-                      (double)270.2, //winddir degrees
-                      (double)4.3, //windspeed ms
-                      (double)11.3, //Heading deg
-                      (double)3.2, //Pitch deg
-                      (double)5.3, //Roll deg
-                      (double)49.40, // gml:pos arg1
-                      (double)-123.26, // gml:pos arg2
-                      (double)15.4, // cog_deg
-                      (double)2.0, //sog_ms
-                      (int)5341,//Rudderpos
-                      (int)3256 //Sailpos
-                      );
-  
-  xml_log.parse_output_file("log_output.xml");
-
 }
