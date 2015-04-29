@@ -23,50 +23,47 @@ void XML_log::log_to_file(std::string timestamp,
     pugi::xml_node node = doc.append_child("message");
 
     /* Tag source */
-    pugi::xml_node node_source = node.append_child("source");
-    node_source.set_value("id");
-    node_source.append_attribute("id") = "RPI";
+    pugi::xml_node node_source = node.append_child("sor");
+    node_source.append_child(pugi::node_pcdata).set_value("RPI");
+
 
     /* Tag systemclock */
-    pugi::xml_node node_systemclock = node.append_child("systemclock");
-    
-    /* Tag timestamp */
-    pugi::xml_node descr = node_systemclock.append_child("timestamp");
-    descr.append_child(pugi::node_pcdata).set_value(timestamp.c_str());
+    pugi::xml_node node_systemclock = node.append_child("tim");
+    node_systemclock.append_child(pugi::node_pcdata).set_value(timestamp.c_str());
 
     /* Tag windsensor */
-    pugi::xml_node node_windsensor = node.append_child("windsensor");
+    pugi::xml_node node_windsensor = node.append_child("ws");
 
     /* Tag app_winddir_deg */
-    pugi::xml_node app_winddir = node_windsensor.append_child("app_winddir_deg");
+    pugi::xml_node app_winddir = node_windsensor.append_child("wdi");
 
     ss.str(std::string()); //Clear stringstream
     ss << windsensor_dir_deg;
     app_winddir.append_child(pugi::node_pcdata).set_value(ss.str().c_str());
 
     /* Tag app_winddir_deg */
-    pugi::xml_node app_windspeed = node_windsensor.append_child("app_windspeed_ms");
+    pugi::xml_node app_windspeed = node_windsensor.append_child("wsp");
     ss.str(std::string()); //Clear stringstream
     ss << windsensor_speed_ms;
     app_windspeed.append_child(pugi::node_pcdata).set_value(ss.str().c_str());
 
     /* Tag compass */
-    pugi::xml_node node_compass = node.append_child("compass");
+    pugi::xml_node node_compass = node.append_child("com");
 
     /* Tag heading_deg */
-    pugi::xml_node heading_deg = node_compass.append_child("heading_deg");
+    pugi::xml_node heading_deg = node_compass.append_child("hea");
     ss.str(std::string()); //Clear stringstream
     ss << compass_heading_deg;
     heading_deg.append_child(pugi::node_pcdata).set_value(ss.str().c_str());
 
     /* Tag pitch_deg */
-    pugi::xml_node pitch_deg = node_compass.append_child("pitch_deg");
+    pugi::xml_node pitch_deg = node_compass.append_child("pit");
     ss.str(std::string()); //Clear stringstream
     ss << compass_pitch_deg;
     pitch_deg.append_child(pugi::node_pcdata).set_value(ss.str().c_str());
 
     /* Tag roll_deg */
-    pugi::xml_node roll_deg = node_compass.append_child("roll_deg");
+    pugi::xml_node roll_deg = node_compass.append_child("rol");
     ss.str(std::string()); //Clear stringstream
     ss << compass_roll_deg;
     roll_deg.append_child(pugi::node_pcdata).set_value(ss.str().c_str());
@@ -74,15 +71,8 @@ void XML_log::log_to_file(std::string timestamp,
     /* Tag gps */
     pugi::xml_node node_gps = node.append_child("gps");
 
-    /* Tag gml:Point  */
-    pugi::xml_node gmlPoint = node_gps.append_child("gml:Point");
-    gmlPoint.set_value("xmlns:gml");
-    gmlPoint.append_attribute("xmlns:gml") = "http://www.ogcnetwork.net/GML";
-
-    /* Tag gml:pos  */
-    pugi::xml_node gmlPos = gmlPoint.append_child("gml:pos");
-    gmlPos.set_value("srsDimension");
-    gmlPos.append_attribute("srsDimension") = "2";
+    /* Tag pos  */
+    pugi::xml_node gmlPos = node_gps.append_child("pos");
     
     ss.str(std::string()); //Clear stringstream
     ss << gps_pos_arg1;
@@ -93,28 +83,28 @@ void XML_log::log_to_file(std::string timestamp,
     gmlPos.append_child(pugi::node_pcdata).set_value(ss.str().c_str());
 
     /* Tag cog_deg */
-    pugi::xml_node cog_deg = node_gps.append_child("cog_deg");    
+    pugi::xml_node cog_deg = node_gps.append_child("cog");    
     ss.str(std::string()); //Clear stringstream
     ss << gps_cog_deg;
     cog_deg.append_child(pugi::node_pcdata).set_value(ss.str().c_str());
 
     /* Tag sog_ms */
-    pugi::xml_node sog_ms = node_gps.append_child("sog_ms");
+    pugi::xml_node sog_ms = node_gps.append_child("sog");
     ss.str(std::string()); //Clear stringstream
     ss << gps_sog_ms;
     sog_ms.append_child(pugi::node_pcdata).set_value(ss.str().c_str());
 
     /* Tag actuator */
-    pugi::xml_node node_actuator = node.append_child("actuator");
+    pugi::xml_node node_actuator = node.append_child("act");
    
     /* Tag rudder_pos */
-    pugi::xml_node rudder_pos = node_actuator.append_child("rudder_pos");
+    pugi::xml_node rudder_pos = node_actuator.append_child("rud");
     ss.str(std::string()); //Clear stringstream
     ss << rudder_position;
     rudder_pos.append_child(pugi::node_pcdata).set_value(ss.str().c_str());
 
     /* Tag sail_pos */
-    pugi::xml_node sail_pos = node_actuator.append_child("sail_pos");
+    pugi::xml_node sail_pos = node_actuator.append_child("sai");
     ss.str(std::string()); //Clear stringstream
     ss << sail_position;
     sail_pos.append_child(pugi::node_pcdata).set_value(ss.str().c_str());
