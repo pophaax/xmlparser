@@ -157,11 +157,6 @@ double XML_log::decimals_to_tenths(double variableToRoundUp){
 int main() {
   XML_log xml_log;
 
-  xml_log.decimals_to_tenths((double)-123.2623232332);
-  xml_log.decimals_to_tenths((double) 300.2623232332);
-  xml_log.decimals_to_tenths((double) 0.2623232332);
-
-
   xml_log.log_to_file("2015-04-10T10:53:15.1234Z", //Timestamp
                       (double)270.2, //winddir degrees
                       (double)4.3, //windspeed ms
