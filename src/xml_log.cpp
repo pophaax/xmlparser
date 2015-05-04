@@ -3,7 +3,7 @@
 #include <sstream>
 #include "xml_log.h"
 
-void XML_log::log_to_file(std::string timestamp,
+std::string XML_log::log_to_file(std::string timestamp,
                           double windsensor_dir_deg,
                           double windsensor_speed_ms,
                           double compass_heading_deg,
@@ -109,8 +109,14 @@ void XML_log::log_to_file(std::string timestamp,
     ss << sail_position;
     sail_pos.append_child(pugi::node_pcdata).set_value(ss.str().c_str());
 
-    // save document to file
-    doc.save_file("log_output.xml");
+
+
+    std::ostringstream out_ss; 
+    out_ss.str(std::string());
+    doc.save(out_ss); 
+    std::string res_xml = out_ss.str(); 
+
+    return res_xml;
   }
 
 void XML_log::parse_output_file(const char* filename) {

@@ -10,7 +10,7 @@ class XML_log {
 
 public:
 
-  void log_to_file(std::string timestamp,
+  std::string log_to_file(std::string timestamp,
                           double windsensor_dir_deg,
                           double windsensor_speed_ms,
                           double compass_heading_deg,
