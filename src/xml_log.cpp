@@ -76,11 +76,11 @@ std::string XML_log::log_to_file(std::string timestamp,
     pugi::xml_node gmlPos = node_gps.append_child("pos");
     
     ss.str(std::string()); //Clear stringstream
-    ss << std::setprecision(10) << gps_pos_arg1;
+    ss << std::setprecision(8) << gps_pos_arg1;
     gmlPos.append_child(pugi::node_pcdata).set_value(ss.str().c_str());
 
     ss.str(std::string()); //Clear stringstream
-    ss << std::setprecision(10) << gps_pos_arg2;
+    ss << std::setprecision(8) << gps_pos_arg2;
     gmlPos.append_child(pugi::node_pcdata).set_value(ss.str().c_str());
 
     /* Tag cog_deg */
