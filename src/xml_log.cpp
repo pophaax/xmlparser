@@ -2,6 +2,7 @@
 #include <cstring>
 #include <sstream>
 #include <iomanip> 
+#include <regex>
 #include "xml_log.h"
 
 std::string XML_log::log_to_file(std::string timestamp,
@@ -117,7 +118,8 @@ std::string XML_log::log_to_file(std::string timestamp,
     doc.save(out_ss); 
     std::string res_xml = out_ss.str(); 
 
-    return res_xml;
+    auto rs = std::regex_replace(res_xml,std::regex("\\s+"), "");
+    return rs;
   }
 
 void XML_log::parse_output_file(const char* filename) {
