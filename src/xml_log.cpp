@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cstring>
 #include <sstream>
+#include <iomanip> 
 #include "xml_log.h"
 
 std::string XML_log::log_to_file(std::string timestamp,
@@ -9,8 +10,8 @@ std::string XML_log::log_to_file(std::string timestamp,
                           double compass_heading_deg,
                           double compass_pitch_deg,
                           double compass_roll_deg,
-                          double gps_pos_arg1,
-                          double gps_pos_arg2,
+                          double gps_pos_arg1,//Lats
+                          double gps_pos_arg2,//Longs
                           double gps_cog_deg,
                           double gps_sog_ms,
                           int rudder_position,
@@ -75,11 +76,11 @@ std::string XML_log::log_to_file(std::string timestamp,
     pugi::xml_node gmlPos = node_gps.append_child("pos");
     
     ss.str(std::string()); //Clear stringstream
-    ss << gps_pos_arg1;
+    ss << std::setprecision(10) << gps_pos_arg1;
     gmlPos.append_child(pugi::node_pcdata).set_value(ss.str().c_str());
 
     ss.str(std::string()); //Clear stringstream
-    ss << gps_pos_arg2;
+    ss << std::setprecision(10) << gps_pos_arg2;
     gmlPos.append_child(pugi::node_pcdata).set_value(ss.str().c_str());
 
     /* Tag cog_deg */
