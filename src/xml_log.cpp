@@ -111,7 +111,7 @@ std::string XML_log::log_to_file(std::string timestamp,
 
     std::ostringstream out_ss; 
     out_ss.str(std::string());
-    doc.save(out_ss, "\t", pugi::format_raw); 
+    doc.save(out_ss, PUGIXML_TEXT("\t"), pugi::format_raw); 
     std::string res_xml = out_ss.str(); 
     return res_xml;
 
