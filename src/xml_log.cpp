@@ -5,7 +5,7 @@
 #include <regex>
 #include "xml_log.h"
 
-std::string XML_log::log_to_file(std::string timestamp,
+std::string XML_log::log_xml(std::string timestamp,
                           double windsensor_dir_deg,
                           double windsensor_speed_ms,
                           double compass_heading_deg,
