@@ -77,7 +77,7 @@ std::string XML_log::log_xml(std::string timestamp,
     pugi::xml_node gmlPos = node_gps.append_child("pos");
     
     ss.str(std::string()); //Clear stringstream
-    ss << std::setprecision(8) << gps_pos_lat << " " << gps_pos_long;
+    ss << std::setprecision(10) << gps_pos_lat << " " << gps_pos_long;        //precision 2+8=10
     gmlPos.append_child(pugi::node_pcdata).set_value(ss.str().c_str());
 
     /* Tag cog_deg */
