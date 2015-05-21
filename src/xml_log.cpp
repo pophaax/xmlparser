@@ -144,7 +144,6 @@ int XML_log::parse_rudCMD(std::string xml_source) {
   pugi::xml_node ship = doc.child("message");
   for (pugi::xml_node child = ship.first_child(); child; child = child.next_sibling()) {
     for (pugi::xml_node node = child.first_child(); node; node = node.next_sibling()) {
-      std::cout << node.name() << "=" << node.child_value() << std::endl;
       if(std::strcmp(node.name(), "rudCMD") == 0) {
         int rudCMD = std::stoi(node.child_value());
         return rudCMD;
@@ -162,7 +161,6 @@ int XML_log::parse_saiCMD(std::string xml_source) {
   pugi::xml_node ship = doc.child("message");
   for (pugi::xml_node child = ship.first_child(); child; child = child.next_sibling()) {
     for (pugi::xml_node node = child.first_child(); node; node = node.next_sibling()) {
-      std::cout << node.name() << "=" << node.child_value() << std::endl;
       if(std::strcmp(node.name(), "saiCMD") == 0) {
         int saiCMD = std::stoi(node.child_value());
         return saiCMD; 
