@@ -27,6 +27,9 @@ public:
 
   double decimals_to_tenths(double variableToRoundUp);
 
+  int parse_saiCMD(std::string xml_source);
+  int parse_rudCMD(std::string xml_source);
+
 };
 
 #endif

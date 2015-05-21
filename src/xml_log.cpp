@@ -137,6 +137,32 @@ void XML_log::parse_output_file(const char* filename) {
   }
 }
 
+int XML_log::parse_rudCMD(std::string xml_source) {
+  pugi::xml_document doc;
+  doc.load(xml_source.c_str());
+
+  pugi::xml_node ship = doc.child("message");
+  for (pugi::xml_node child = ship.first_child(); child; child = child.next_sibling()) {
+    for (pugi::xml_node node = child.first_child(); node; node = node.next_sibling()) {
+      std::cout << node.name() << "=" << node.child_value() << std::endl;
+    }
+  }
+}
+
+
+int XML_log::parse_saiCMD(std::string xml_source) {
+  pugi::xml_document doc;
+  doc.load(xml_source.c_str());
+
+  pugi::xml_node ship = doc.child("message");
+  for (pugi::xml_node child = ship.first_child(); child; child = child.next_sibling()) {
+    for (pugi::xml_node node = child.first_child(); node; node = node.next_sibling()) {
+      std::cout << node.name() << "=" << node.child_value() << std::endl;
+    }
+  }
+}
+
+
 double XML_log::decimals_to_tenths(double variableToRoundUp){
   
   double tenths_scale = 0.1;  // Round up decimals to the nearest tenths
