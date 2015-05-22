@@ -170,6 +170,21 @@ int XML_log::parse_saiCMD(std::string xml_source) {
   return -1;
 }
 
+std::string XML_log::parse_time(std::string xml_source) {
+  pugi::xml_document doc;
+  doc.load(xml_source.c_str());
+
+  pugi::xml_node ship = doc.child("message");
+  for (pugi::xml_node child = ship.first_child(); child; child = child.next_sibling()) {
+    for (pugi::xml_node node = child.first_child(); node; node = node.next_sibling()) {
+      if(std::strcmp(node.name(), "tim") == 0) {
+        std::string timestamp = node.child_value();
+        return timestamp; 
+      }
+    }
+  }
+  return "";
+}
 
 double XML_log::decimals_to_tenths(double variableToRoundUp){
   
