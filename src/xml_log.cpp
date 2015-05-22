@@ -176,11 +176,10 @@ std::string XML_log::parse_time(std::string xml_source) {
 
   pugi::xml_node ship = doc.child("message");
   for (pugi::xml_node child = ship.first_child(); child; child = child.next_sibling()) {
-    for (pugi::xml_node node = child.first_child(); node; node = node.next_sibling()) {
-      if(std::strcmp(node.name(), "tim") == 0) {
-        std::string timestamp = node.child_value();
+      if(std::strcmp(child.name(), "tim") == 0) {
+        std::string timestamp = child.child_value();
+	std::cout << "Timestamp in xmlparser " << timestamp << std::endl;
         return timestamp; 
-      }
     }
   }
   return "";
