@@ -178,7 +178,6 @@ std::string XML_log::parse_time(std::string xml_source) {
   for (pugi::xml_node child = ship.first_child(); child; child = child.next_sibling()) {
       if(std::strcmp(child.name(), "tim") == 0) {
         std::string timestamp = child.child_value();
-	std::cout << "Timestamp in xmlparser " << timestamp << std::endl;
         return timestamp; 
     }
   }
