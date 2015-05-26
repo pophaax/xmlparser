@@ -29,8 +29,7 @@ public:
 
   int parse_saiCMD(std::string xml_source);
   int parse_rudCMD(std::string xml_source);
-  time_t parse_time(std::string xml_source);
-  time_t getEpochTime(const std::string& dateTime);
+  std::string parse_time(std::string xml_source);
 
 
 };
