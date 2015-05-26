@@ -1,8 +1,8 @@
-#include <iostream>
 #include <cstring>
 #include <sstream>
-#include <iomanip> 
-#include <regex>
+#include <iostream>     
+#include <iomanip>      
+#include <ctime>        
 #include "xml_log.h"
 
 std::string XML_log::log_xml(std::string timestamp,
@@ -170,7 +170,18 @@ int XML_log::parse_saiCMD(std::string xml_source) {
   return -1;
 }
 
-std::string XML_log::parse_time(std::string xml_source) {
+time_t XML_log::getEpochTime(const std::string& dateTime) {
+  struct std::tm tm;
+  std::istringstream ss(dateTime);
+  ss >> std::get_time(&tm, "%Y-%m-%dT%H:%M:%SZ"); 
+  time_t res_time = mktime(&tm);
+
+  // Convert the tm structure to time_t value and return.
+  return res_time;
+}
+
+
+time_t XML_log::parse_time(std::string xml_source) {
   pugi::xml_document doc;
   doc.load(xml_source.c_str());
 
@@ -178,10 +189,10 @@ std::string XML_log::parse_time(std::string xml_source) {
   for (pugi::xml_node child = ship.first_child(); child; child = child.next_sibling()) {
       if(std::strcmp(child.name(), "tim") == 0) {
         std::string timestamp = child.child_value();
-        return timestamp; 
+        return getEpochTime(timestamp); 
     }
   }
-  return "";
+  return 0;
 }
 
 double XML_log::decimals_to_tenths(double variableToRoundUp){
