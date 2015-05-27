@@ -181,7 +181,7 @@ std::string XML_log::parse_time(std::string xml_source) {
         return timestamp; 
     }
   }
-  return 0;
+  return "";
 }
 
 double XML_log::decimals_to_tenths(double variableToRoundUp){
