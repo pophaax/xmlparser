@@ -1,5 +1,5 @@
 CC = g++
-CFLAGS = -g -pedantic -std=c++14
+CFLAGS = -g -pedantic -std=c++14 -I $(SAILINGROBOTS_HOME)
 FILES_PARSER = src/xmlparser.cpp pugi/*.cpp
 EXECUTABLE = parser
 

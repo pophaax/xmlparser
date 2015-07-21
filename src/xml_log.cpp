@@ -4,6 +4,7 @@
 #include <iomanip>      
 #include <ctime>        
 #include "xml_log.h"
+#include "xmlparser/pugi/pugixml.hpp"
 
 std::string XML_log::log_xml(std::string timestamp,
                           double windsensor_dir_deg,

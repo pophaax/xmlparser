@@ -1,10 +1,5 @@
-
 #ifndef __XML_LOG_H__
 #define __XML_LOG_H__
-#include <iostream>
-#include <cstring>
-#include <sstream>
-#include "../pugi/pugixml.hpp"
 
 class XML_log {
 
