@@ -75,19 +75,19 @@ std::string XML_log::log_xml(std::string timestamp,
     roll_deg.append_child(pugi::node_pcdata).set_value(ss.str().c_str());
     
     /* Tag accel_x */
-    pugi::xml_node accel_x = node_compass.append_child("accelX");
+    pugi::xml_node accel_x = node_compass.append_child("acX");
     ss.str(std::string()); //Clear stringstream
     ss << decimals_to_tenths(compass_accel_x); 
     roll_deg.append_child(pugi::node_pcdata).set_value(ss.str().c_str());
     
     /* Tag accel_y */
-    pugi::xml_node accel_y = node_compass.append_child("accelY");
+    pugi::xml_node accel_y = node_compass.append_child("acY");
     ss.str(std::string()); //Clear stringstream
     ss << decimals_to_tenths(compass_accel_y); 
     roll_deg.append_child(pugi::node_pcdata).set_value(ss.str().c_str());
     
     /* Tag accel_z */
-    pugi::xml_node accel_z = node_compass.append_child("accelZ");
+    pugi::xml_node accel_z = node_compass.append_child("acZ");
     ss.str(std::string()); //Clear stringstream
     ss << decimals_to_tenths(compass_accel_z); 
     roll_deg.append_child(pugi::node_pcdata).set_value(ss.str().c_str());
