@@ -75,22 +75,22 @@ std::string XML_log::log_xml(std::string timestamp,
     roll_deg.append_child(pugi::node_pcdata).set_value(ss.str().c_str());
     
     /* Tag accel_x */
-    pugi::xml_node accel_x = node_compass.append_child("acX");
+    pugi::xml_node accel_x = node_compass.append_child("acx");
     ss.str(std::string()); //Clear stringstream
     ss << decimals_to_tenths(compass_accel_x); 
-    roll_deg.append_child(pugi::node_pcdata).set_value(ss.str().c_str());
+    accel_x.append_child(pugi::node_pcdata).set_value(ss.str().c_str());
     
     /* Tag accel_y */
-    pugi::xml_node accel_y = node_compass.append_child("acY");
+    pugi::xml_node accel_y = node_compass.append_child("acy");
     ss.str(std::string()); //Clear stringstream
     ss << decimals_to_tenths(compass_accel_y); 
-    roll_deg.append_child(pugi::node_pcdata).set_value(ss.str().c_str());
+    accel_y.append_child(pugi::node_pcdata).set_value(ss.str().c_str());
     
     /* Tag accel_z */
-    pugi::xml_node accel_z = node_compass.append_child("acZ");
+    pugi::xml_node accel_z = node_compass.append_child("acz");
     ss.str(std::string()); //Clear stringstream
     ss << decimals_to_tenths(compass_accel_z); 
-    roll_deg.append_child(pugi::node_pcdata).set_value(ss.str().c_str());
+    accel_z.append_child(pugi::node_pcdata).set_value(ss.str().c_str());
     
     /* Tag gps */
     pugi::xml_node node_gps = node.append_child("gps");
