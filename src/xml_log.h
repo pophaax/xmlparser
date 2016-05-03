@@ -19,7 +19,8 @@ public:
                           double gps_cog_deg,
                           double gps_sog_ms,
                           int rudder_position,
-                          int sail_position);
+                          int sail_position,
+                          int pressure_sensor_value);
 
   void parse_output_file(const char* filename);
 

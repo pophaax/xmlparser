@@ -20,7 +20,8 @@ std::string XML_log::log_xml(std::string timestamp,
                           double gps_cog_deg,
                           double gps_sog_ms,
                           int rudder_position,
-                          int sail_position) {
+                          int sail_position,
+                          int pressure_sensor_value) {
 
     std::stringstream ss;
     pugi::xml_document doc;
@@ -128,6 +129,12 @@ std::string XML_log::log_xml(std::string timestamp,
     ss.str(std::string()); //Clear stringstream
     ss << sail_position;
     sail_pos.append_child(pugi::node_pcdata).set_value(ss.str().c_str());
+
+    /* Tag pressure_sensor */
+    pugi::xml_node pressure_sensor = node_actuator.append_child("pre");
+    ss.str(std::string()); //Clear stringstream
+    ss << pressure_sensor_value;
+    pressure_sensor.append_child(pugi::node_pcdata).set_value(ss.str().c_str());
 
 
 
