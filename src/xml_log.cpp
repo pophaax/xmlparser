@@ -19,9 +19,12 @@ std::string XML_log::log_xml(std::string timestamp,
                           double gps_pos_long,
                           double gps_cog_deg,
                           double gps_sog_ms,
+                          int arduino_pre,
+                          int arduino_avr,
+                          int arduino_avs,
+                          int arduino_cur,
                           int rudder_position,
-                          int sail_position,
-                          int pressure_sensor_value) {
+                          int sail_position) {
 
     std::stringstream ss;
     pugi::xml_document doc;
@@ -92,6 +95,29 @@ std::string XML_log::log_xml(std::string timestamp,
     ss.str(std::string()); //Clear stringstream
     ss << decimals_to_tenths(compass_accel_z); 
     accel_z.append_child(pugi::node_pcdata).set_value(ss.str().c_str());
+
+    /* Tag arduino */
+    pugi::xml_node node_arduino = node.append_child("ard");
+
+    /* Tag arduino_pre */
+    pugi::xml_node pre = node_arduino.append_child("pre");
+    ss.str(std::string()); //Clear stringstream
+    pre.append_child(pugi::node_pcdata).set_value(ss.str().c_str());
+
+    /* Tag arduino_avr */
+    pugi::xml_node avr = node_arduino.append_child("avr");
+    ss.str(std::string()); //Clear stringstream
+    avr.append_child(pugi::node_pcdata).set_value(ss.str().c_str());
+
+    /* Tag arduino_avs */
+    pugi::xml_node avs = node_arduino.append_child("avs");
+    ss.str(std::string()); //Clear stringstream
+    avs.append_child(pugi::node_pcdata).set_value(ss.str().c_str());
+
+    /* Tag arduino_cur */
+    pugi::xml_node cur = node_arduino.append_child("cur");
+    ss.str(std::string()); //Clear stringstream
+    cur.append_child(pugi::node_pcdata).set_value(ss.str().c_str());
     
     /* Tag gps */
     pugi::xml_node node_gps = node.append_child("gps");
@@ -129,12 +155,6 @@ std::string XML_log::log_xml(std::string timestamp,
     ss.str(std::string()); //Clear stringstream
     ss << sail_position;
     sail_pos.append_child(pugi::node_pcdata).set_value(ss.str().c_str());
-
-    /* Tag pressure_sensor */
-    pugi::xml_node pressure_sensor = node_actuator.append_child("pre");
-    ss.str(std::string()); //Clear stringstream
-    ss << pressure_sensor_value;
-    pressure_sensor.append_child(pugi::node_pcdata).set_value(ss.str().c_str());
 
 
 
