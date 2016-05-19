@@ -18,9 +18,12 @@ public:
                           double gps_pos_long,
                           double gps_cog_deg,
                           double gps_sog_ms,
+                          int arduino_pre,
+                          int arduino_avr,
+                          int arduino_avs,
+                          int arduino_cur,
                           int rudder_position,
-                          int sail_position,
-                          int pressure_sensor_value);
+                          int sail_position);
 
   void parse_output_file(const char* filename);
 
