@@ -102,21 +102,25 @@ std::string XML_log::log_xml(std::string timestamp,
     /* Tag arduino_pre */
     pugi::xml_node pre = node_arduino.append_child("pre");
     ss.str(std::string()); //Clear stringstream
+    ss << arduino_pre; 
     pre.append_child(pugi::node_pcdata).set_value(ss.str().c_str());
 
     /* Tag arduino_avr */
     pugi::xml_node avr = node_arduino.append_child("avr");
     ss.str(std::string()); //Clear stringstream
+    ss << arduino_avr;
     avr.append_child(pugi::node_pcdata).set_value(ss.str().c_str());
 
     /* Tag arduino_avs */
     pugi::xml_node avs = node_arduino.append_child("avs");
     ss.str(std::string()); //Clear stringstream
+    ss << arduino_avs;
     avs.append_child(pugi::node_pcdata).set_value(ss.str().c_str());
 
     /* Tag arduino_cur */
     pugi::xml_node cur = node_arduino.append_child("cur");
     ss.str(std::string()); //Clear stringstream
+    ss << arduino_cur;
     cur.append_child(pugi::node_pcdata).set_value(ss.str().c_str());
     
     /* Tag gps */
