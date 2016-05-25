@@ -33,7 +33,7 @@ std::string XML_log::log_xml(std::string timestamp,
 
     /* Tag Message */
     pugi::xml_node node = doc.append_child("message");
-    pugi::xml_node node_mess = doc.append_child("message");
+    pugi::xml_node node_mess = doc_mess.append_child("message");
 
     /* Tag source */
     pugi::xml_node node_source = node.append_child("sor");
